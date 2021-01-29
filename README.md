@@ -8,8 +8,9 @@ cargo build --target thumbv7em-none-eabihf
 
 cargo readobj --target thumbv7em-none-eabihf --bin f4 -- -file-headers
 
-## Launch in another terminal
+## Launch in another terminal and leave it open
 
+cd /tmp
 openocd -f interface/stlink-v2-1.cfg -f target/stm32f4x.cfg
 
 ## In RustySTM32 directory launch gdb
