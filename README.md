@@ -23,10 +23,14 @@ Write this in the file
 
 ```sh
 ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE:="0666"
-```sh
+```
 
+Create another file
+
+```sh
 touch /etc/udev/rules.d/99-openocd.rules
 sudo gedit /etc/udev/rules.d/99-openocd.rules
+```
 
 ```sh
 # STM32F3DISCOVERY rev A/B - ST-LINK/V2
@@ -34,7 +38,7 @@ ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", MODE:="0666"
 
 # STM32F3DISCOVERY rev C+ - ST-LINK/V2-1
 ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", MODE:="0666"
-```sh
+```
 
 Then reload the udev rules with:
 
@@ -45,28 +49,40 @@ sudo udevadm control --reload-rules
 
 ## Build
 
+```sh
 cargo build --target thumbv7em-none-eabihf
+```
 
 ## Verify
 
+```sh
 cargo readobj --target thumbv7em-none-eabihf --bin f4 -- -file-headers
+```
 
 ## Launch in another terminal and leave it open
 
+```sh
 cd /tmp
 openocd -f interface/stlink-v2-1.cfg -f target/stm32f4x.cfg
+```
 
 ## In RustySTM32 directory launch gdb
 
+```sh
 gdb-multiarch -q target/thumbv7em-none-eabihf/debug/f4
+```
 
 ## In gdb enter
 
+```sh
 target extended-remote: 3333
+```
 
 ## In gdb enter
 
+```sh
 load
+```
 
 # References
 
